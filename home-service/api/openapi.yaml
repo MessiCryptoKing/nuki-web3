@@ -1,0 +1,40 @@
+openapi: 3.1.0
+info:
+  title: Nuki web3 home-service
+  description: |-
+    ...
+  version: 1.0.0
+paths:
+  /door/open:
+    post:
+      summary: Open the door
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpenDoorRequest'
+      responses:
+        '200':
+          description: Door opened successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenDoorResponse'
+        '403':
+          description: User is not allowed to open the door
+        '500':
+          description: Door can not be opened
+components:
+  schemas:
+    OpenDoorRequest:
+      type: object
+      properties:
+        message:
+          type: string
+          description: encrypted string to verify the private key.
+    OpenDoorResponse:
+      type: object
+      properties:
+        status:
+          type: string
